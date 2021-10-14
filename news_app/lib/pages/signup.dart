@@ -20,7 +20,7 @@ class _SignupState extends State<Signup> {
     final TextEditingController passwordcontroller = TextEditingController();
     final TextEditingController confirmpasswordcontroller =
         TextEditingController();
-    bool obscureText = true;
+    bool _obscureText = true;
 
     void register() async {
       FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,41 +29,37 @@ class _SignupState extends State<Signup> {
       final String password = passwordcontroller.text;
       final String confpassword = confirmpasswordcontroller.text;
       try {
-        if (confpassword == password) {
-          await auth.createUserWithEmailAndPassword(
-              email: email, password: password);
-          final user = auth.currentUser!;
-          final uid = user.uid;
-          var users = await http.post(
-              Uri.https("newsapp-flutter.herokuapp.com", "signup"),
-              body: {'name':name ,'email': email, 'uid': uid});
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Profile()));
-        }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'email-already-in-use') {
-          showDialog<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("SignUp"),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const <Widget>[
-                      Text('Email is already exist'),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text('OK'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+        await auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        final user = auth.currentUser!;
+        final uid = user.uid;
+        // var users =
+        await http.post(Uri.https("newsapp-flutter.herokuapp.com", "signup"),
+            body: {'name': name, 'email': email, 'authenticationId': uid});
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Profile()));
+      } catch (e) {
+        showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("SignUp"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text("$e.[message]"),
                   ],
-                );
-              });
-        }
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
       }
     }
 
@@ -135,7 +131,7 @@ class _SignupState extends State<Signup> {
               child: SizedBox(
                 width: 330,
                 child: TextFormField(
-                    obscureText: obscureText,
+                    obscureText: _obscureText,
                     controller: passwordcontroller,
                     decoration: InputDecoration(
                       border: const UnderlineInputBorder(),
@@ -143,7 +139,7 @@ class _SignupState extends State<Signup> {
                       suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
-                              obscureText = false;
+                              _obscureText = !_obscureText;
                             });
                           },
                           icon: const Icon(
@@ -171,7 +167,7 @@ class _SignupState extends State<Signup> {
               child: SizedBox(
                 width: 330,
                 child: TextFormField(
-                    obscureText: obscureText,
+                    obscureText: _obscureText,
                     controller: confirmpasswordcontroller,
                     decoration: InputDecoration(
                       border: const UnderlineInputBorder(),
@@ -179,7 +175,7 @@ class _SignupState extends State<Signup> {
                       suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
-                              obscureText = false;
+                              _obscureText = !_obscureText;
                             });
                           },
                           icon: const Icon(

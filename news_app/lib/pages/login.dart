@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:news_app/pages/guest_navigation.dart';
+import 'package:news_app/guestUser/guest_navigation.dart';
 import 'package:news_app/pages/navigation.dart';
 import 'package:news_app/pages/signup.dart';
 
@@ -19,7 +19,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     final TextEditingController emailcontroller = TextEditingController();
     final TextEditingController passwordcontroller = TextEditingController();
-    bool obscureText = true;
+    bool _obscureText = true;
 
     void login() async {
       FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,11 +29,11 @@ class _LoginState extends State<Login> {
         await auth.signInWithEmailAndPassword(email: email, password: password);
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const NavigationPage()));
-        final user = auth.currentUser!;
-        final uid = user.uid;
-        var users = await http
-            .post(Uri.https("newsapp-flutter.herokuapp.com", "login"),body:{'authenticationId': uid,
-            "email":email},);
+        var user = auth.currentUser;
+        var uid = user!.uid;
+        // var users = 
+        await http
+            .post(Uri.https("newsapp-flutter.herokuapp.com", "login"),body:{'authenticationId': uid},);
            
 
       } catch (e) {
@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
                   child: SizedBox(
                     width: 330,
                     child: TextFormField(
-                        obscureText: obscureText,
+                        obscureText: _obscureText,
                         controller: passwordcontroller,
                         decoration: InputDecoration(
                             border: const UnderlineInputBorder(),
@@ -121,7 +121,8 @@ class _LoginState extends State<Login> {
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    obscureText = !obscureText;
+                                    
+                                    _obscureText = !_obscureText;
                                   });
                                 },
                                 icon: const Icon(
@@ -211,7 +212,3 @@ class _LoginState extends State<Login> {
   }
 }
 
-class UserModel {
-  var uid, email;
-  UserModel(this.uid, this.email) {}
-}

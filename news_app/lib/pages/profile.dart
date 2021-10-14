@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:news_app/pages/edit_profile.dart';
+import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -9,6 +12,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  File? file;
+  // getUser()async{
+  //   var profile =await http.get(Uri.https("newsapp-flutter.herokuapp.com", "signup"));
+  //   var jsonData = jsonDecode(profile.body);
+  //   for(var i in jsonData){
+  //     if(){
+
+  //     }
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +37,6 @@ class _ProfileState extends State<Profile> {
               fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
         )),
       ),
-     
       body: Column(
         mainAxisSize: MainAxisSize.max,
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,12 +45,16 @@ class _ProfileState extends State<Profile> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 10, left: 10),
+               Padding(
+                padding:const EdgeInsets.only(top: 10, left: 10),
                 child: CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(
-                      "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png"),
+                  backgroundImage: 
+                  file == null
+                            ? const AssetImage("")
+                            : FileImage(File(file!.path)) as ImageProvider
+                  // NetworkImage(
+                  //     "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png"),
                 ),
               ),
               Padding(
@@ -59,12 +76,12 @@ class _ProfileState extends State<Profile> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top:100),
+                  padding: const EdgeInsets.only(top: 100),
                   child: Container(
                       width: 300,
                       height: 40,
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.black)),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
                       child: const Center(
                           child: Text(
                         "Muhammad Abdul Mustafa Azmi",
@@ -72,12 +89,12 @@ class _ProfileState extends State<Profile> {
                       ))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Container(
                       width: 300,
                       height: 40,
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.black)),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
                       child: const Center(
                           child: Text(
                         "abc@gmail.com",
@@ -85,12 +102,12 @@ class _ProfileState extends State<Profile> {
                       ))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Container(
                       width: 300,
                       height: 40,
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.black)),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
                       child: const Center(
                           child: Text(
                         "Karachi Pakistan",
@@ -98,12 +115,12 @@ class _ProfileState extends State<Profile> {
                       ))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Container(
                       width: 300,
                       height: 40,
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.black)),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
                       child: const Center(
                           child: Text(
                         "0123456789",

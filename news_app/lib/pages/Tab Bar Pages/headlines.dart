@@ -1,4 +1,8 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:news_app/Model/headlinemodel.dart';
+import 'package:news_app/Model/headlinenews_api.dart';
 
 class Headlines extends StatefulWidget {
   const Headlines({Key? key}) : super(key: key);
@@ -7,113 +11,35 @@ class Headlines extends StatefulWidget {
 }
 
 class _HeadlinesState extends State<Headlines> {
+  List<NewsApiModel>? newsList;
+  void initState() {
+    super.initState();
+    getNews().then((value) {
+      setState(() {
+        newsList = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(children: [
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "sjfioerjfionsdk",
-            "fierutiocjkvnerio"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "jfiweuiojcsdkl",
-            "ieruifndfkjerioeridj;oweuihuierdb"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "fijweiofjilduehf",
-            "nsfiefidfuijs;iojf;ios"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "fiejwriowehuirfhwehfio",
-            "jfiefioherjiofjwepi"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "ejrfiwe4jfuilherpofh",
-            "ierutigndfjkn;io"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "hferuithvndf",
-            "dnfguiejxcnfjo"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "jweriofjerfh;uiosdh",
-            "dsjferiojf;ioejpfoewj"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "mfierjndjkfp",
-            "fuieriofjhdij"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "diosjfiorehgfuijfio",
-            "fjaseiofjseiofjose"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Heer will be description",
-            "ckjdeirjncjksjfiow",
-            "sdjfiowejfojfiowefiorusdnk"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Here will be description",
-            "sfkjeriojfioe",
-            "cjkeprdvnj"),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        listview(
-            "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/GTYSdDW/videoblocks-world-news-background-business-concept-2_bieq0ayrm_thumbnail-1080_01.png",
-            "Author's name",
-            "Here will be title",
-            "Here will be description",
-            "kfjsdklrjwioufisdnkl",
-            "ksjfiojeiofjeo"),
+        ListView.builder(
+          itemCount: newsList!.length,
+          itemBuilder: (context, index) {
+            return listview(size, newsList![index]);
+          },
+        )
       ]),
     ));
   }
 }
 
-Widget listview(var image, var authorname, var title, var description, var link,
-    var source) {
+// var image, var authorname, var title, var description
+Widget listview(Size size, NewsApiModel model) {
   return FittedBox(
     child: Container(
       // width: 400,
@@ -156,7 +82,7 @@ Widget listview(var image, var authorname, var title, var description, var link,
                                       topLeft: Radius.circular(20),
                                       topRight: Radius.circular(20)),
                                   image: DecorationImage(
-                                    image: NetworkImage(image),
+                                    image: NetworkImage(model.imageUrl),
                                     fit: BoxFit.fill,
                                   ),
                                   shape: BoxShape.rectangle),
@@ -176,18 +102,19 @@ Widget listview(var image, var authorname, var title, var description, var link,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 180),
                         child: Text(
-                          authorname,
+                          model.author,
                           style: const TextStyle(fontSize: 14),
                           // textAlign: TextAlign.right,
                         ),
                       ),
                     ),
                     Stack(
+                      // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 170),
                           child: Text(
-                            title,
+                            model.title,
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.left,
@@ -198,29 +125,11 @@ Widget listview(var image, var authorname, var title, var description, var link,
                     Padding(
                       padding: const EdgeInsets.only(right: 170),
                       child: Text(
-                        description,
+                        model.description,
                         style: const TextStyle(fontSize: 13),
                         // textAlign: TextAlign.left,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 170),
-                      child: Text(
-                        link,
-                        style: const TextStyle(fontSize: 10),
-                        textAlign: TextAlign.left,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 170),
-                      child: Text(
-                        source,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(fontSize: 10),
                       ),
                     ),
                   ],

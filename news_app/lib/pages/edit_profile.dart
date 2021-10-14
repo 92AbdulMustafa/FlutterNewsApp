@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -36,6 +38,7 @@ class _EditProfileState extends State<EditProfile> {
     final TextEditingController passwordcontroller = TextEditingController();
     final TextEditingController confirmpasswordcontroller =
         TextEditingController();
+    final TextEditingController numbertcontroller = TextEditingController();
     String downloadUrl = "";
     String imagepath = "";
     bool obscureText = true;
@@ -55,12 +58,32 @@ class _EditProfileState extends State<EditProfile> {
         UploadTask task = imagefile.putFile(file!);
         TaskSnapshot snapshot = await task;
         downloadUrl = await snapshot.ref.getDownloadURL();
-        final String name = namecontroller.text;
-        final String email = emailcontroller.text;
-        final String address = addresscontroller.text;
-        final String payment = paymentcontroller.text;
-        final String password = passwordcontroller.text;
-        final String confirmPassword = confirmpasswordcontroller.text;
+        String name = namecontroller.text;
+        String email = emailcontroller.text;
+        String address = addresscontroller.text;
+        String payment = paymentcontroller.text;
+        //  String password = passwordcontroller.text;
+        //  String confirmPassword = confirmpasswordcontroller.text;
+        String number = numbertcontroller.text;
+        // var profile=
+        await http.post(
+            Uri.https("newsapp-flutter.herokuapp.com", "editProfile"),
+            body: {
+              'name': name,
+              'address': address,
+              'payment': payment,
+              'picture': downloadUrl,
+              'number':number
+            });
+        // var getdata = await http
+        //     .get(Uri.https("newsapp-flutter.herokuapp.com", "editProfile"));
+        // var jsondata = jsonDecode(getdata.body);
+        // var _name = jsondata['name'];
+        // var addrs = jsondata['address'];
+        // var paymnt = jsondata['payment'];
+        // var numbr = jsondata['number'];
+
+
         showDialog<void>(
             context: context,
             builder: (BuildContext context) {
@@ -171,6 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                         child: TextFormField(
                             controller: namecontroller,
                             decoration: const InputDecoration(
+                              
                               border: UnderlineInputBorder(),
                               labelText: 'Name',
                             )),
@@ -271,6 +295,22 @@ class _EditProfileState extends State<EditProfile> {
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Address',
+                            )),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 15,
+                    ),
+                    child: Center(
+                      child: SizedBox(
+                        width: 200,
+                        child: TextFormField(
+                            controller: numbertcontroller,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Number',
                             )),
                       ),
                     ),
