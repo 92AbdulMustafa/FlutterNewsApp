@@ -12,6 +12,7 @@ class PopularNews extends StatefulWidget {
 
 class _PopularNewsState extends State<PopularNews> {
   List<PopularNewsApiModel>? popularnewsList;
+  @override
   void initState() {
     super.initState();
     getNews().then((value) {
@@ -28,7 +29,7 @@ class _PopularNewsState extends State<PopularNews> {
         body: SingleChildScrollView(
       child: Column(children: [
         ListView.builder(
-            itemCount: popularnewsList!.length,
+            itemCount: popularnewsList?.length,
             itemBuilder: (context, index) {
               return listview(size, popularnewsList![index]);
             },)

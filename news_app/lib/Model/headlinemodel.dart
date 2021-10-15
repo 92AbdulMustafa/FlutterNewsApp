@@ -13,6 +13,6 @@ class NewsApiModel {
           author: jsonData['author'], 
           title: jsonData['title'], 
           description: jsonData['description'], 
-          id: jsonData['id']);
+          id: jsonData['name']);
       }
 }

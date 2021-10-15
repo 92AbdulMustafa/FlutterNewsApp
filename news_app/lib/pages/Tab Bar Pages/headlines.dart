@@ -12,6 +12,7 @@ class Headlines extends StatefulWidget {
 
 class _HeadlinesState extends State<Headlines> {
   List<NewsApiModel>? newsList;
+  @override
   void initState() {
     super.initState();
     getNews().then((value) {
@@ -28,7 +29,7 @@ class _HeadlinesState extends State<Headlines> {
         body: SingleChildScrollView(
       child: Column(children: [
         ListView.builder(
-          itemCount: newsList!.length,
+          itemCount: newsList?.length,
           itemBuilder: (context, index) {
             return listview(size, newsList![index]);
           },
