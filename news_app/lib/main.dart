@@ -48,11 +48,5 @@ class MyApp extends StatelessWidget {
 }
 
 
-// API Key--->   e92a7c0e3479484a99a31fe3ed104bdc   (newsapi.org)
 
-// API Key----> 0a247a2cf89cb6ef41d8860affff0a60    (mediastack.com)   http://api.mediastack.com/v1/
-
-// mongodb+srv://newsapp:<password>@cluster0.gnahu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
-// newsapp123   db password
 
